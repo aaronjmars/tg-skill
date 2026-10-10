@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Read-only Telegram reader. Usage: ./tg <login|dialogs|chat> [args]
+# Credentials: see README (env vars, config file, or pass).
+set -euo pipefail
+cd "$(dirname "$(realpath "$0")")"
+
+if ! command -v node >/dev/null; then
+  echo "Node.js 20+ is required: https://nodejs.org" >&2
+  exit 1
+fi
+# First run: install dependencies.
+if [ ! -x node_modules/.bin/tsx ]; then
+  npm ci --silent --no-audit --no-fund >&2
+fi
+
+cmd="${1:-}"
+case "$cmd" in
+login | dialogs | chat)
+  shift
+  NODE_NO_WARNINGS=1 exec node_modules/.bin/tsx "src/$cmd.ts" "$@"
+  ;;
+*)
+  echo "usage: ./tg <login|dialogs|chat> [args]" >&2
+  exit 2
+  ;;
+esac

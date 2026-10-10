@@ -1,0 +1,26 @@
+{
+  "name": "tg-skill",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only Telegram reader for AI agents: reads your own DMs, groups and channels",
+  "scripts": {
+    "login": "tsx src/login.ts",
+    "dialogs": "tsx src/dialogs.ts",
+    "chat": "tsx src/chat.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "telegram": "^2.26.22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
