@@ -1,5 +1,5 @@
 import { Api } from "telegram";
-import { connect } from "./client.js";
+import { connect, finish } from "./client.js";
 import { day, dialogName, dialogType, formatMessage } from "./format.js";
 
 // Who is waiting on a reply from me, over the last N days (default 60).
@@ -98,5 +98,4 @@ console.log(`== Groups with mentions, replies or my name since my last message (
 console.log(groupOut.join("\n") || "(none)\n");
 if (notes.length) console.log(`Not fully read:\n${notes.map((n) => `- ${n}`).join("\n")}`);
 
-await client.disconnect();
-process.exit(0);
+await finish(client);
