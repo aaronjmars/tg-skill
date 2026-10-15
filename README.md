@@ -25,9 +25,12 @@ That's it. Ask Claude about your Telegram chats.
 ## Commands
 
 ```sh
-./tg dialogs                 # list all chats: id, type, unread, name
+./tg dialogs                 # list all chats: id, type, unread, last activity, name
 ./tg chat "alice"            # last 50 messages with Alice
 ./tg chat "uniswap" 150      # last 150 messages in a group
+./tg chat -5318659178        # a chat by id (from dialogs)
+./tg waiting                 # who is waiting on your reply (last 60 days)
+./tg waiting 14              # same, last 14 days
 ```
 
 ## Where your login is stored
