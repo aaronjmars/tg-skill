@@ -1,6 +1,6 @@
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import { makeClient } from "./client.js";
+import { finish, makeClient } from "./client.js";
 import { get, save, type Key } from "./config.js";
 
 // One-time interactive login. Asks for the API id/hash if they are not set yet,
@@ -35,5 +35,4 @@ rl.close();
 toSave.TG_SESSION = client.session.save() as unknown as string;
 const where = save(toSave);
 console.log(`\nLogged in. Saved to ${where}.`);
-await client.disconnect();
-process.exit(0);
+await finish(client);

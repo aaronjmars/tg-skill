@@ -23,3 +23,14 @@ export async function connect(): Promise<TelegramClient> {
   await client.connect();
   return client;
 }
+
+/**
+ * Disconnect and exit once everything printed has been written out.
+ * GramJS keeps timers alive, so we must exit explicitly, but on macOS a piped
+ * stdout is async and a bare process.exit() cuts off long output (~64KB).
+ */
+export async function finish(client: TelegramClient): Promise<never> {
+  await client.disconnect();
+  await new Promise<void>((resolve) => process.stdout.write("", () => resolve()));
+  process.exit(0);
+}

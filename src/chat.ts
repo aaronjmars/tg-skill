@@ -1,4 +1,4 @@
-import { connect } from "./client.js";
+import { connect, finish } from "./client.js";
 import { dialogName, dialogType, formatMessage } from "./format.js";
 
 // Fetch a conversation by name (fuzzy substring match) or by exact chat id.
@@ -28,8 +28,7 @@ if (byId) matches.splice(0, matches.length, byId);
 
 if (matches.length === 0) {
   console.log(`No chat matching "${target}".`);
-  await client.disconnect();
-  process.exit(0);
+  await finish(client);
 }
 
 const exact = matches.filter((d) => dialogName(d).toLowerCase() === query);
@@ -38,8 +37,7 @@ if (exact.length === 1) matches.splice(0, matches.length, exact[0]);
 if (matches.length > 1) {
   console.log(`Multiple matches for "${target}" - be more specific or use the id:`);
   for (const d of matches) console.log(`  - ${dialogName(d)} (${dialogType(d)}, id=${d.id})`);
-  await client.disconnect();
-  process.exit(0);
+  await finish(client);
 }
 
 const d = matches[0];
@@ -53,5 +51,4 @@ for await (const m of client.iterMessages(d.id, { limit })) {
 }
 console.log(buf.reverse().join("\n"));
 
-await client.disconnect();
-process.exit(0);
+await finish(client);
