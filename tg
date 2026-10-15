@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Read-only Telegram reader. Usage: ./tg <login|dialogs|chat> [args]
+# Read-only Telegram reader. Usage: ./tg <login|dialogs|chat|waiting> [args]
 # Credentials: see README (env vars, config file, or pass).
 set -euo pipefail
 cd "$(dirname "$(realpath "$0")")"
@@ -15,12 +15,12 @@ fi
 
 cmd="${1:-}"
 case "$cmd" in
-login | dialogs | chat)
+login | dialogs | chat | waiting)
   shift
   NODE_NO_WARNINGS=1 exec node_modules/.bin/tsx "src/$cmd.ts" "$@"
   ;;
 *)
-  echo "usage: ./tg <login|dialogs|chat> [args]" >&2
+  echo "usage: ./tg <login|dialogs|chat|waiting> [args]" >&2
   exit 2
   ;;
 esac
