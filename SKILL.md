@@ -81,3 +81,11 @@ Keep it read-only.
 
 - The saved session gives full access to the account. Never print it, and never
   show the contents of the config file or the user's `pass` entries.
+
+## Feedback
+
+If a command, flag, route or step in this skill is wrong, fails, or could be better, file one short report with the `feedback` CLI. Never put keys or private data in it.
+
+```sh
+feedback skill:telegram <bug|error|idea|missing> "<title>" "<what happened, what you expected>"
+```
