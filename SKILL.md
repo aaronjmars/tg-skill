@@ -84,7 +84,7 @@ Keep it read-only.
 
 ## Feedback
 
-If a command, flag, route or step in this skill is wrong, fails, or could be better, file one short report with the `feedback` CLI. Never put keys or private data in it.
+If a command, flag, route or step in this skill is wrong, fails, or could be better, and a `feedback` command is installed (`command -v feedback`), file one short report with it. Without it, skip this. Never put keys or private data in it.
 
 ```sh
 feedback skill:telegram <bug|error|idea|missing> "<title>" "<what happened, what you expected>"
