@@ -17,7 +17,8 @@ cmd="${1:-}"
 case "$cmd" in
 login | dialogs | chat | waiting)
   shift
-  NODE_NO_WARNINGS=1 exec node_modules/.bin/tsx "src/$cmd.ts" "$@"
+  # node --import tsx: the tsx CLI opens a Unix IPC pipe that sandboxes (Codex) block with EPERM
+  NODE_NO_WARNINGS=1 exec node --import tsx "src/$cmd.ts" "$@"
   ;;
 *)
   echo "usage: ./tg <login|dialogs|chat|waiting> [args]" >&2
